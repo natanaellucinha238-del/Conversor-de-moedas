@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiseConvert Pro — Plataforma Global de Câmbio Comercial</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <meta name="description" content="WiseConvert Pro — Cotação comercial de moedas em tempo real com taxa zero e transparência bancária.">
+    <meta property="og:title" content="WiseConvert Pro — Câmbio Inteligente">
+    <meta property="og:description" content="Calcule conversões de Dólar, Euro, Libra e Bitcoin com dados em tempo real da B3 e mercado internacional.">
+    <meta property="og:type" content="website">
+</head>
+<body>
+
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <div class="app-layout">
+        
+        <header class="navbar">
+            <div class="brand">
+                <div class="logo-badge">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">Wise<span class="text-lime">Convert</span></span>
+                    <span class="brand-tag">PRO</span>
+                </div>
+            </div>
+
+            <div class="header-status">
+                <span class="status-indicator">
+                    <span class="dot-pulse"></span>
+                    <span id="status-text">Mercado Aberto</span>
+                </span>
+                <button id="theme-toggle" class="icon-btn" title="Alternar Modo de Cor" aria-label="Alternar tema">
+                    <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="main-card">
+            
+            <div class="card-header">
+                <h2>Câmbio Comercial ao Vivo</h2>
+                <p>Transferências com taxa comercial real e sem margens ocultas.</p>
+            </div>
+
+            <div class="quick-presets">
+                <span class="preset-label">Atalhos:</span>
+                <button class="preset-btn" data-value="100">+ R$ 100</button>
+                <button class="preset-btn" data-value="500">+ R$ 500</button>
+                <button class="preset-btn active" data-value="1000">R$ 1.000</button>
+                <button class="preset-btn" data-value="5000">R$ 5.000</button>
+            </div>
+
+            <div class="currency-field" id="field-from">
+                <div class="field-meta">
+                    <label for="from-amount">Você envia exatamente</label>
+                    <span class="field-info" id="from-symbol">R$</span>
+                </div>
+                <div class="field-row">
+                    <input type="number" id="from-amount" value="1000" placeholder="0.00" step="any" min="0">
+                    
+                    <div class="custom-select" id="select-from-wrapper">
+                        <button class="select-trigger" id="from-currency-btn" type="button">
+                            <span class="flag-icon" id="from-flag">🇧🇷</span>
+                            <span class="currency-code" id="from-code">BRL</span>
+                            <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="middle-flow">
+                <div class="flow-line"></div>
+                
+                <div class="flow-pill-container">
+                    <div class="rate-badge" id="live-rate-badge">
+                        <span class="rate-spinner" id="rate-spinner"></span>
+                        <span id="rate-text">1 BRL = 0.1785 USD</span>
+                    </div>
+
+                    <button id="swap-btn" class="swap-button" title="Inverter moedas de origem e destino" aria-label="Inverter moedas">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="currency-field recipient-field" id="field-to">
+                <div class="field-meta">
+                    <label for="to-amount">O destinatário recebe</label>
+                    <span class="field-info" id="to-symbol">$</span>
+                </div>
+                <div class="field-row">
+                    <div class="skeleton-loader" id="amount-skeleton"></div>
+                    <input type="text" id="to-amount" readonly value="0.00" placeholder="0.00">
+                    
+                    <div class="custom-select" id="select-to-wrapper">
+                        <button class="select-trigger" id="to-currency-btn" type="button">
+                            <span class="flag-icon" id="to-flag">🇺🇸</span>
+                            <span class="currency-code" id="to-code">USD</span>
+                            <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="transparency-accordion">
+                <div class="accordion-item">
+                    <div class="accordion-row">
+                        <span class="item-label">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            Taxa de Câmbio Comercial
+                        </span>
+                        <strong class="item-value" id="detail-exchange-rate">1 USD = R$ 5,60</strong>
+                    </div>
+                    <div class="accordion-row">
+                        <span class="item-label">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            Tarifa de Serviço WiseConvert
+                        </span>
+                        <strong class="item-value free-badge">R$ 0,00 (Grátis)</strong>
+                    </div>
+                    <div class="accordion-row">
+                        <span class="item-label">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                            Economia estimada vs. Bancos Tradicionais
+                        </span>
+                        <strong class="item-value highlight-green" id="savings-text">~ R$ 42,50 economizados</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-chart-card">
+                <div class="chart-header">
+                    <span class="chart-title">Tendência do Par (<span id="chart-pair">BRL/USD</span>)</span>
+                    <span class="chart-trend positive" id="trend-badge">+0.38% hoje</span>
+                </div>
+                <div class="sparkline-wrapper">
+                    <svg class="sparkline-svg" viewBox="0 0 300 45" preserveAspectRatio="none">
+                        <path id="sparkline-path" d="M0,35 Q30,25 60,30 T120,15 T180,22 T240,10 T300,18" fill="none" stroke="var(--lime-primary)" stroke-width="2.5"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="action-group">
+                <button id="convert-btn" class="primary-btn">
+                    <span class="btn-text">Atualizar Cotação</span>
+                    <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <button id="copy-btn" class="secondary-btn" title="Copiar cotação atual">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <span>Copiar Resumo</span>
+                </button>
+            </div>
+
+        </main>
+
+        <footer class="app-footer">
+            <div class="footer-info">
+                <p><strong>WiseConvert Pro Engine v2.4</strong> — Dados em tempo real fornecidos por AwesomeAPI & B3.</p>
+                <p>Desenvolvido por <strong>Natanael</strong> | Full Stack Developer & Redes Tech</p>
+            </div>
+        </footer>
+    </div>
+
+    <div class="modal-overlay" id="currency-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Selecione a Moeda</h3>
+                <button class="close-modal" id="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-search">
+                <input type="text" id="currency-search-input" placeholder="Pesquisar por moeda ou país (ex: USD, Euro...)">
+            </div>
+            <div class="currency-list" id="currency-list-container">
+                </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast-notification">
+        <span class="toast-icon">⚡</span>
+        <span id="toast-message">Cotação atualizada com sucesso!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
